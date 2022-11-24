@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeatureSwitch", "FeatureSwitch\FeatureSwitch.csproj", "{9218852D-12F3-4FC5-9179-1935578D67EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureSwitchApp", "FeatureSwitchApp\FeatureSwitchApp.csproj", "{3D8BD90D-014B-4773-BE23-95F2F1ACC369}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9218852D-12F3-4FC5-9179-1935578D67EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9218852D-12F3-4FC5-9179-1935578D67EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9218852D-12F3-4FC5-9179-1935578D67EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9218852D-12F3-4FC5-9179-1935578D67EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D8BD90D-014B-4773-BE23-95F2F1ACC369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D8BD90D-014B-4773-BE23-95F2F1ACC369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D8BD90D-014B-4773-BE23-95F2F1ACC369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D8BD90D-014B-4773-BE23-95F2F1ACC369}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D176FF1F-C2E1-4D7B-B252-7AB416AFD0B2}
+	EndGlobalSection
+EndGlobal
