@@ -1,6 +1,6 @@
-﻿namespace ConfigurationProvider.ConfigurationManagement.Models
+﻿namespace ConfigurationProvider.Models
 {
-    public class FeatureConfig
+    public class FeatureConfiguration
     {
         public string App { get; set; }
         public string UserGroup { get; set; }
