@@ -7,8 +7,17 @@ namespace FeatureSwitch
         // register features for target app ? path
         public void RegisterFeature(FeatureConfigEntity config, string target);
 
+        public void RegisterFeature(FeatureConfigEntity config, ITickManager instance);
+
         // Interface for load module to get app path
         public string GetPath();
+
+        public ITickManager GetInstance();
+    }
+    
+    public interface ITickManager
+    {
+
     }
     
     //DO NOT CHANGE
