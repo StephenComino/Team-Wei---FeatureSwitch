@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Workshop2022.API.Models.Services;
 
 namespace FeatureSwitch
 {
