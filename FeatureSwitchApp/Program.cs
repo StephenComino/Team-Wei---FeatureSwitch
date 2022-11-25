@@ -1,7 +1,11 @@
 ﻿using ApiClient;
 using ConfigurationProvider.Contracts;
+
+using FeatureSwitch.Contract;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+using FeatureSwitch.FeatureHandler;
 
 namespace FeatureSwitch
 {
@@ -32,7 +36,8 @@ namespace FeatureSwitch
 
                     var config = configProvider.LoadConfig();
 
-                    return fs.Get();
+                    return new TestApp1.TestApp();
+                    //return fs.Get();
                 });
 
                 services.AddScoped<IFeatureExecutor, FeatureExecutor>();

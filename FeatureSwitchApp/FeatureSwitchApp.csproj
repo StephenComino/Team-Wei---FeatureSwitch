@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ApiClient\ApiClient.csproj" />
     <ProjectReference Include="..\ConfigurationProvider\ConfigurationProvider.csproj" />
+    <ProjectReference Include="..\FeatureSwitch.Contract\FeatureSwitch.Contract.csproj" />
     <ProjectReference Include="..\FeatureSwitch\FeatureSwitch.csproj" />
   </ItemGroup>
 

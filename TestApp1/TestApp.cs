@@ -1,4 +1,4 @@
-﻿using FeatureSwitch.Feature;
+﻿using FeatureSwitch.Contract;
 
 namespace TestApp1
 {

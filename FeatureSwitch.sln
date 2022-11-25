@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationProvider", "Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{2C47FB24-00F5-4C93-9C15-E14BB6C00055}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp1", "TestApp1\TestApp1.csproj", "{53FAF5BC-F328-4832-910F-FFF14D45B102}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeatureSwitch.Contract", "FeatureSwitch.Contract\FeatureSwitch.Contract.csproj", "{121D72E4-64B0-48A7-ADEC-DF94C6B7B97E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{2C47FB24-00F5-4C93-9C15-E14BB6C00055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C47FB24-00F5-4C93-9C15-E14BB6C00055}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C47FB24-00F5-4C93-9C15-E14BB6C00055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53FAF5BC-F328-4832-910F-FFF14D45B102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53FAF5BC-F328-4832-910F-FFF14D45B102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53FAF5BC-F328-4832-910F-FFF14D45B102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53FAF5BC-F328-4832-910F-FFF14D45B102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{121D72E4-64B0-48A7-ADEC-DF94C6B7B97E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{121D72E4-64B0-48A7-ADEC-DF94C6B7B97E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{121D72E4-64B0-48A7-ADEC-DF94C6B7B97E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{121D72E4-64B0-48A7-ADEC-DF94C6B7B97E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

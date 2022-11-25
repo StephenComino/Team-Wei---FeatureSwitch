@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FeatureSwitch.Feature
+namespace FeatureSwitch.Contract
 {
     public interface IFeatureExecutor
     {
