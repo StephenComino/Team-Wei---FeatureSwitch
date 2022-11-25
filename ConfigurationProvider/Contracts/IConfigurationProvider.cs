@@ -1,4 +1,5 @@
-﻿using ConfigurationProvider.Models;
+﻿using ApiClient;
+using ConfigurationProvider.Models;
 
 namespace ConfigurationProvider.Contracts
 {
@@ -8,7 +9,7 @@ namespace ConfigurationProvider.Contracts
         /// Will load the last saved FeatureConfiguration from file.
         /// </summary>
         /// <returns>Last saved FeatureConfiguration or null if file was not found.</returns>
-        public FeatureConfiguration LoadConfig();
+        public FeatureConfiguration? LoadConfig(FilterModel filter);
 
         /// <summary>
         /// Saves the current FeatureConfiguration to file.

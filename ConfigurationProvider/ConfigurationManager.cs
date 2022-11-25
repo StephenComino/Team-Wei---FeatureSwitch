@@ -6,41 +6,29 @@ namespace ConfigurationProvider
 {
     public class ConfigurationManager : IConfigurationManager
     {
+        private readonly IStorageManager _storageManager;
+        private readonly IEncryptionManager _encryptionManager;
+
+        public ConfigurationManager(IStorageManager _storageManager, IEncryptionManager encryptionManager)
+        {
+            this._storageManager = _storageManager;
+            _encryptionManager = encryptionManager;
+        }
         public void SaveConfigToFile(string filePath, FeatureConfiguration config)
         {
             var serializedConfig = JsonConvert.SerializeObject(config);
-            //Can encrypt at this stage before sending off to write file
-            //serializedConfig = _EncryptionManager.encrypt(serializedConfig);
-            try
-            {
-                File.WriteAllText(filePath, serializedConfig);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error reading file: {0}", ex.Message);
-            }
-            
+            var encryptedSerializedConfig = _encryptionManager.Encrypt(serializedConfig);
+            _storageManager.SaveFile(filePath, encryptedSerializedConfig);
+
         }
 
-        public FeatureConfiguration LoadConfigFromFile(string filePath)
+        public FeatureConfiguration? LoadConfigFromFile(string filePath)
         {
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    var fileContent = File.ReadAllText(filePath);
-                    //Should decrypt at this stage if wanted
-                    //fileContent = _EncryptionManager.decrypt(fileContent);
-                    return JsonConvert.DeserializeObject<FeatureConfiguration>(fileContent);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error reading file: {0}", ex.Message);
-                }
-
-
-            }
-            return null!;
+            var encrptedSerliazedConfig = _storageManager.LoadFile(filePath);
+            if (encrptedSerliazedConfig == null)
+                return null;
+            var SerializedConfig = _encryptionManager.Decrypt(encrptedSerliazedConfig);
+            return JsonConvert.DeserializeObject<FeatureConfiguration>(SerializedConfig);
         }
     }
 }

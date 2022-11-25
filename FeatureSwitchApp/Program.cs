@@ -35,6 +35,7 @@ namespace FeatureSwitch
                     var fs = s.GetService<IFeatureSwitch>() ?? throw new ArgumentNullException("IFeatureSwitch");
                     var configProvider = s.GetService<IConfigurationProvider>() ?? throw new ArgumentNullException("IConfigurationProvider");
 
+                    //Load could return null if neither API is available or storage has prev config, should default to a default config here
                     var config = configProvider.LoadConfig();
 
                     return new TestApp1.TestApp();

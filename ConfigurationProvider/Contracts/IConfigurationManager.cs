@@ -17,6 +17,6 @@ namespace ConfigurationProvider.Contracts
         /// </summary>
         /// <param name="filePath">File path to load from.</param>
         /// <returns>Last saved FeatureConfiguration or null if file was not found.</returns>
-        public FeatureConfiguration LoadConfigFromFile(string filePath);
+        public FeatureConfiguration? LoadConfigFromFile(string filePath);
     }
 }
