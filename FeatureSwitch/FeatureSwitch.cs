@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConfigurationProvider;
+using ConfigurationProvider.Contracts;
+using ConfigurationProvider.Models;
 
 namespace FeatureSwitch
 {
@@ -10,9 +13,15 @@ namespace FeatureSwitch
         private readonly Dictionary<ITickManager, List<Feature>> _registerServices = new Dictionary<ITickManager, List<Feature>>();
         private List<Feature> _features;
         private string _defaultPath = "";
+        private IConfigurationManager _configurationManager;
+
+        public FeatureSwitch(IConfigurationManager configurationManager)
+        {
+            _configurationManager = configurationManager;
+        }
 
         // Register features for app
-        public void RegisterFeature(FeatureConfigEntity config, string target)
+        public void RegisterFeature(FeatureConfiguration config, string target)
         {
             var features = new List<Feature>();
             if (config == null || config.App == null || config.App == "")
@@ -52,7 +61,7 @@ namespace FeatureSwitch
             // set features
         }
 
-        public void RegisterFeature(FeatureConfigEntity config, ITickManager instance)
+        public void RegisterFeature(FeatureConfiguration config, ITickManager instance)
         {
             var features = new List<Feature>();
             if (config == null || config.App == null || config.App == "")
@@ -74,6 +83,7 @@ namespace FeatureSwitch
 
         public ITickManager GetInstance()
         {
+            var config = _configurationManager.LoadConfigFromFile("");
             foreach (var key in _registerServices.Keys)
             {
                 // multiple matches?
