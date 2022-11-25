@@ -2,6 +2,6 @@
 {
     public interface IClient
     {
-        public QueryResult Get(FilterModel filterModel);
+        public Task<QueryResult> Get(FilterModel filterModel);
     }
 }

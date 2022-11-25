@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ApiClient;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace FeatureSwitch
@@ -9,11 +10,15 @@ namespace FeatureSwitch
         {
             var host = Host.CreateDefaultBuilder(args).ConfigureServices((_, services) =>
             {
-                services.AddScoped<IFeatureSwitch, FeatureSwitch>();
+                services.AddScoped<IClient, Client>();
+                services.AddSingleton<IFeatureSwitch, FeatureSwitch>();
             }).Build();
 
+            host.Services.GetRequiredService<IFeatureSwitch>();
             host.Run();
 
+
+            //host.Services.GetService<IFeatureSwitch>();
         }
     }
 }
