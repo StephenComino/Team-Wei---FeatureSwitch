@@ -1,3 +1,5 @@
+using ConfigurationProvider.Models;
+using FeatureSwitch.Contract;
 using System.Collections.Generic;
 using ConfigurationProvider;
 using ConfigurationProvider.Models;
@@ -14,7 +16,9 @@ namespace FeatureSwitch
         // Interface for load module to get app path
         public string GetPath();
 
-        public ITickManager GetInstance();
+        public IFeatureApp Get(FeatureConfiguration config);
+
+        public IFeatureApp GetInstance();
     }
 
     public interface ITickManager

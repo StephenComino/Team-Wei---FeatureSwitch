@@ -18,6 +18,15 @@ namespace FeatureSwitch
             {
                 services.AddScoped<IClient, Client>();
                 services.AddSingleton<IFeatureSwitch, FeatureSwitch>();
+                services.AddSingleton<IStorageManager, StorageManager>();
+                services.AddScoped<IEncryptionManager>(s =>
+                {
+#if DEBUG
+                    return new PlainEncryption();
+#else
+                    return new RSAEncryption();
+#endif
+                });
                 services.AddScoped<IConfigurationManager, ConfigurationProvider.ConfigurationManager>();
                 services.AddScoped<IEncryptionManager, PlainEncryption>();
                 services.AddScoped<IConfigurationProvider, ConfigurationProvider.ConfigurationProvider>();
@@ -26,8 +35,22 @@ namespace FeatureSwitch
                 services.AddScoped<IFeatureSwitch, FeatureSwitch>(s =>
                 {
                     FeatureSwitch fs = new FeatureSwitch();
+                    
+                    fs.RegisterFeature(
+                        new FeatureConfigEntity()
+                        {
+                            App = "TestApp",
+                            Version = "v1",
+                            Device = "windows"
+                        }, new TestApp1.TestApp());
 
-                    // fs.Register("TestApp", "v1", new TestApp1.TestApp());
+                    fs.RegisterFeature(
+                        new FeatureConfigEntity()
+                        {
+                            App = "TestApp",
+                            Version = "v2",
+                            Device = "windows"
+                        }, new TestApp2.TestApp());
 
                     return fs;
                 });
@@ -40,8 +63,7 @@ namespace FeatureSwitch
                     //Load could return null if neither API is available or storage has prev config, should default to a default config here
                     var config = configProvider.LoadConfig(new FilterModel() { App = "TestApp01", FeatureCode = "Bootstrap" });
 
-                    return new TestApp1.TestApp();
-                    //return fs.Get();
+                    return fs.Get(config);
                 });
 
                 services.AddScoped<IFeatureExecutor, FeatureExecutor>();

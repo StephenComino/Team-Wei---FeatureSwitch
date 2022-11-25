@@ -1,3 +1,4 @@
+using FeatureSwitch.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace FeatureSwitch
     public class FeatureSwitch : IFeatureSwitch
     {
         private readonly Dictionary<string, List<Feature>> _registerDlls = new Dictionary<string, List<Feature>>();
-        private readonly Dictionary<ITickManager, List<Feature>> _registerServices = new Dictionary<ITickManager, List<Feature>>();
+        private readonly Dictionary<IFeatureApp, List<Feature>> _registerServices = new Dictionary<IFeatureApp, List<Feature>>();
         private List<Feature> _features;
         private string _defaultPath = "";
         private IConfigurationManager _configurationManager;
@@ -67,7 +68,8 @@ namespace FeatureSwitch
             // set features
         }
 
-        public void RegisterFeature(FeatureConfiguration config, ITickManager instance)
+
+        public void RegisterFeature(FeatureConfigEntity config, IFeatureApp instance)
         {
             var features = new List<Feature>();
             if (config == null || config.App == null || config.App == "")
@@ -86,8 +88,12 @@ namespace FeatureSwitch
 
             _registerServices.Add(instance, features);
         }
+        public IFeatureApp Get(FeatureConfigEntity config)
+        {
+            return _registerServices.Keys.ElementAt(0);
+        }
 
-        public ITickManager GetInstance()
+        public IFeatureApp GetInstance()
         {
             var config = _configurationManager.LoadConfigFromFile("");
             foreach (var key in _registerServices.Keys)

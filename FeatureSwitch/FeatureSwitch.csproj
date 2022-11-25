@@ -14,6 +14,7 @@
     <ProjectReference Include="..\ConfigurationProvider\ConfigurationProvider.csproj" />
     <ProjectReference Include="..\FeatureSwitch.Contract\FeatureSwitch.Contract.csproj" />
     <ProjectReference Include="..\TestApp1\TestApp1.csproj" />
+    <ProjectReference Include="..\TestApp2\TestApp2.csproj" />
   </ItemGroup>
 
 </Project>
