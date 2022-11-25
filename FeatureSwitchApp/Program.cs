@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 using FeatureSwitch.FeatureHandler;
 using ConfigurationProvider;
+using ConfigurationProvider.Models;
 
 namespace FeatureSwitch
 {
@@ -37,7 +38,7 @@ namespace FeatureSwitch
                     FeatureSwitch fs = new FeatureSwitch();
                     
                     fs.RegisterFeature(
-                        new FeatureConfigEntity()
+                        new FeatureConfiguration()
                         {
                             App = "TestApp",
                             Version = "v1",
@@ -45,7 +46,7 @@ namespace FeatureSwitch
                         }, new TestApp1.TestApp());
 
                     fs.RegisterFeature(
-                        new FeatureConfigEntity()
+                        new FeatureConfiguration()
                         {
                             App = "TestApp",
                             Version = "v2",

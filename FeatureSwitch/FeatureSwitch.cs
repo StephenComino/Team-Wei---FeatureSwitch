@@ -12,13 +12,13 @@ namespace FeatureSwitch
     {
         private readonly Dictionary<string, List<Feature>> _registerDlls = new Dictionary<string, List<Feature>>();
         private readonly Dictionary<IFeatureApp, List<Feature>> _registerServices = new Dictionary<IFeatureApp, List<Feature>>();
-        private List<Feature> _features;
+        private List<Feature> _features = new List<Feature>();
         private string _defaultPath = "";
-        private IConfigurationManager _configurationManager;
 
-        public FeatureSwitch(IConfigurationManager configurationManager)
+
+        public FeatureSwitch()
         {
-            _configurationManager = configurationManager;
+
         }
 
         // Register features for app
@@ -42,12 +42,6 @@ namespace FeatureSwitch
             _registerDlls.Add(target, features);
         }
 
-        public async void WaitTest(IClient client)
-        {
-            //var result = await client.Get(new FilterModel() { App = "TestApp01", FeatureCode = "CustMaster" });
-            var result = await client.IsUp();
-            //Console.WriteLine(result.App);
-        }
         // match features to a target app path
         public string GetPath()
         {
@@ -69,7 +63,7 @@ namespace FeatureSwitch
         }
 
 
-        public void RegisterFeature(FeatureConfigEntity config, IFeatureApp instance)
+        public void RegisterFeature(FeatureConfiguration config, IFeatureApp instance)
         {
             var features = new List<Feature>();
             if (config == null || config.App == null || config.App == "")
@@ -88,23 +82,11 @@ namespace FeatureSwitch
 
             _registerServices.Add(instance, features);
         }
-        public IFeatureApp Get(FeatureConfigEntity config)
+        public IFeatureApp Get(FeatureConfiguration config)
         {
             return _registerServices.Keys.ElementAt(0);
         }
 
-        public IFeatureApp GetInstance()
-        {
-            var config = _configurationManager.LoadConfigFromFile("");
-            foreach (var key in _registerServices.Keys)
-            {
-                // multiple matches?
-                if (_registerServices[key].Except(_features).ToList().Count == 0)
-                    return key;
-            }
-
-            return null; // default instance?
-        }
     }
 
     
