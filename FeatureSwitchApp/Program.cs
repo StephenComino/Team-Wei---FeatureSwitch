@@ -17,6 +17,7 @@ namespace FeatureSwitch
             {
                 services.AddScoped<IClient, Client>();
                 services.AddSingleton<IFeatureSwitch, FeatureSwitch>();
+                services.AddScoped<IConfigurationManager, ConfigurationProvider.ConfigurationManager>();
                 services.AddScoped<IConfigurationProvider, ConfigurationProvider.ConfigurationProvider>();
 
 
