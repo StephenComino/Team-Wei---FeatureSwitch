@@ -8,10 +8,8 @@ namespace ApiClient
 {
     public class FilterModel
     {
-        public string Application { get; set; }
-        public string? IP { get; set; }
-        public string UserId { get; set; }
-        public string Device { get; set; }
-        public Dictionary<string,string> CustomField { get; set; }
+        public string App { get; set; }
+        public string FeatureCode { get; set; }
+        public string Version { get; set; }
     }
 }

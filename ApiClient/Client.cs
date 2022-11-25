@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ApiClient
 {
@@ -13,7 +15,6 @@ namespace ApiClient
         public Client() :base()
         {
             BaseAddress = new Uri("https://localhost:44300/");
-            DefaultRequestHeaders.Accept.Clear();
         }
 
         public async Task<QueryResult> Get(FilterModel filterModel)
@@ -23,14 +24,36 @@ namespace ApiClient
             {
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(@"https://localhost:44300/API/features"),
-                Content = new StringContent(data, Encoding.UTF8, MediaTypeNames.Application.Json /* or "application/json" in older versions */),
+                Content = new StringContent(data, Encoding.UTF8, "application/json"),
+            };
+
+            var response = await SendAsync(request).ConfigureAwait(true);
+            response.EnsureSuccessStatusCode();
+            var content = response.Content.ReadAsStringAsync().Result;
+            var result = JsonConvert.DeserializeObject<QueryResult>(content);
+
+            return result;
+        }
+
+        public async Task<bool> IsUp()
+        {
+  
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(@"https://localhost:44300/API/service-status"),
+       
             };
 
             var response = await SendAsync(request).ConfigureAwait(true);
             response.EnsureSuccessStatusCode();
 
-            
-            return new QueryResult();
+            var content = response.Content.ReadAsStringAsync().Result;
+            if (content == "OK")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

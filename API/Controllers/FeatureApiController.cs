@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Workshop2022.API.Models;
 using Workshop2022.API.Models.Features;
 using Workshop2022.API.Models.Services;
@@ -36,37 +39,29 @@ namespace Workshop2022.API.Controllers
 
         [HttpPost]
         [Route("features")]
-        public IActionResult RetrieveFeatures(FeaturesRequest model)
+        public IActionResult RetrieveFeatures(object model)
         {
+
+            var requestModel = JsonConvert.DeserializeObject<FeaturesRequest>(model.ToString());
             // -- SAMPLE ONLY - populate filter(s) from request 
             var ipAddress = Request.HttpContext.Connection.RemoteIpAddress;
-            var features = _data.GetFeatures(x => x.App == model.App && x.FeatureCode == model.FeatureCode);
+            var features = _data.GetFeatures(x => x.App == requestModel.App && x.FeatureCode == requestModel.FeatureCode);
 
-            FeaturesResponse resultEntity;
-            // -- add code as needed
-            foreach (var feature in features)
+            if (features.Count > 0)
             {
-                var ipSplit = feature.IpMask.Split(".");
-                var remoteIpSplit = ipAddress.ToString().Split(".");
-                for (int i = 0; i < ipSplit.Length; i++)
+                FeaturesResponse resultEntity = new FeaturesResponse()
                 {
-                    if (ipSplit[i] != remoteIpSplit[i] && ipSplit[i] != "0")
-                    {
-                        continue;
-                    } else
-                    {
-                        resultEntity = new FeaturesResponse()
-                        {
-                            App = feature.App,
-                            UserGroup = feature.UserGroup,
-                            CustomFields = feature.CustomFields
-                        };
-                        return Ok(resultEntity);
-                    }
-                }
+                    App = features[0].App,
+                    UserGroup = features[0].UserGroup,
+                    CustomFields = features[0].CustomFields
+                };
+                return Ok(JsonConvert.SerializeObject(resultEntity));
             }
+        
+            /// Check IP
             
-            return Ok(new FeaturesResponse());
+            var data = JsonConvert.SerializeObject(new FeaturesResponse());
+            return BadRequest(data);
         }
 
         
