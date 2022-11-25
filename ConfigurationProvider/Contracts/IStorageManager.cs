@@ -10,7 +10,7 @@ namespace ConfigurationProvider.Contracts
         public string? LoadFile(string filePath);
     }
 
-    class StorageManager : IStorageManager
+    public class StorageManager : IStorageManager
     {
         public void SaveFile(string filePath, string content)
         {

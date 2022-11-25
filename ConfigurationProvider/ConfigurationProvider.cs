@@ -20,7 +20,7 @@ namespace ConfigurationProvider
             var clientResult= _client.Get(filter);
             if (clientResult == null)
             {
-                var configFromStorage = _configurationManager.LoadConfigFromFile(Assembly.GetExecutingAssembly().Location);
+                var configFromStorage = _configurationManager.LoadConfigFromFile(Environment.CurrentDirectory + "\\Config.txt");
                 if (configFromStorage == null)
                 {
                     Console.WriteLine("No storage config or API available");
@@ -35,12 +35,21 @@ namespace ConfigurationProvider
 
         public void SaveConfig(FeatureConfiguration config)
         {
-            _configurationManager.SaveConfigToFile(Assembly.GetExecutingAssembly().Location, config);
+            _configurationManager.SaveConfigToFile(Environment.CurrentDirectory + "\\Config.txt", config);
         }
 
         public FeatureConfiguration ConvertToFeatureConfiguration(QueryResult input)
         {
-            return new FeatureConfiguration(); //TODO: mapping
+            return new FeatureConfiguration()
+            {   App = input.App,
+                UserGroup = input.UserGroup,
+                IpMask = input.IpMask,
+                Device = input.Device,
+                CustomFields = input.CustomFields,
+                FeatureCode = input.FeatureCode,
+                Version = input.Version,
+                Enabled = input.Enabled
+            }; //TODO: mapping
         }
     }
 }

@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
+
 using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace ApiClient
 {
@@ -28,7 +24,15 @@ namespace ApiClient
             };
 
             var response = await SendAsync(request).ConfigureAwait(true);
-            response.EnsureSuccessStatusCode();
+
+            try
+            {
+                response.EnsureSuccessStatusCode();
+            } catch (Exception e)
+            {
+                return null;
+            }
+
             var content = response.Content.ReadAsStringAsync().Result;
             var result = JsonConvert.DeserializeObject<QueryResult>(content);
 

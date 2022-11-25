@@ -11,10 +11,6 @@ namespace FeatureSwitch
         private List<Feature> _features;
         private string _defaultPath = "";
 
-        public FeatureSwitch(IClient client)
-        {
-            WaitTest(client);
-        }
         // Register features for app
         public void RegisterFeature(FeatureConfigEntity config, string target)
         {
@@ -36,12 +32,12 @@ namespace FeatureSwitch
             _registerFeatures.Add(target, features);
         }
 
-        public async void WaitTest(IClient client)
-        {
-            //var result = await client.Get(new FilterModel() { App = "TestApp01", FeatureCode = "CustMaster" });
-            var result = await client.IsUp();
-            //Console.WriteLine(result.App);
-        }
+        //public async void WaitTest(IClient client)
+        //{
+        //    var result = await client.Get(new FilterModel() { App = "Optus", FeatureCode = "CustMaster" });
+        //    //var result = await client.IsUp();
+        //    Console.WriteLine(result.App);
+        //}
         // match features to a target app path
         public string GetPath()
         {
